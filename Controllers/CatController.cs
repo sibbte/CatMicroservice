@@ -1,5 +1,13 @@
-﻿using System;
+﻿using CatMicroservice.Enum;
+using CatMicroservice.Manager;
+using CatMicroservice.Models;
+using CatMicroservice.Validators;
+using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +16,6 @@ namespace CatMicroservice.Controllers
     public class CatController : ControllerBase
     {
         private readonly CatManager catManager;
-        private readonly CustomerManager customerManager;
         private readonly CatContext _context;
         private readonly CatValidator validator = new CatValidator();
 
@@ -16,7 +23,6 @@ namespace CatMicroservice.Controllers
         {
             _context = context;
             catManager = new CatManager(_context);
-            customerManager = new CustomerManager(_context);
 
         }
 
@@ -72,7 +78,7 @@ namespace CatMicroservice.Controllers
                 throw new DataException($"Cant search for '{tagId}'.");
             }
         }
-
+        /*
         //GET: Api/Cat/GetCatOwnerByFirstName
         [HttpGet]
         [Route("Api/Cat/GetCatOwnerByFirstName")]
@@ -166,7 +172,7 @@ namespace CatMicroservice.Controllers
                 throw new DataException($"Cant Search For '{postCode}'.");
             }
 
-        }
+        }*/
 
         // POST: FuelType/Create
         [HttpPost]
@@ -190,7 +196,7 @@ namespace CatMicroservice.Controllers
                 CatVetCity = CatVetCity.Trim(),
                 CatVetPhoneNo = CatVetPhoneNo.Trim(),
                 CatMedicalCondition = null,
-                Customer = customerManager.Find(owner),
+                Customer = owner,
                 UserId = user
             };
             ValidationResult result = validator.Validate(cat);
@@ -227,7 +233,7 @@ namespace CatMicroservice.Controllers
                 CatVetCity = CatVetCity.Trim(),
                 CatVetPhoneNo = CatVetPhoneNo.Trim(),
                 CatMedicalCondition = null,
-                Customer = customerManager.Find(owner),
+                Customer = owner,
                 UserId = user
             };
             ValidationResult result = validator.Validate(cat);

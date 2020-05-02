@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CatMicroservice.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -97,7 +100,7 @@ namespace CatMicroservice.Manager
             var cat = GetAllByName().OrderBy(x => x.Customer).ToList();
             for (int i = 0; i < cat.Count(); i++)
             {
-                if (cat[i].Customer.ID == customer)
+                if (cat[i].Customer == customer)
                 {
                     result.Add(cat[i]);
                 }
@@ -111,7 +114,7 @@ namespace CatMicroservice.Manager
                 throw new DataException($"No Cats with the '{customer}'.");
             }
         }
-
+        /*
         public IEnumerable<Cat> GetCatOwnerByFirstName(string name)
         {
             IList<Cat> result = new List<Cat>();
@@ -235,7 +238,7 @@ namespace CatMicroservice.Manager
             {
                 throw new DataException($"No Customer with the telephone number, '{postCode}' was found");
             }
-        }
+        }*/
 
         public void Create(Cat cat)
         {

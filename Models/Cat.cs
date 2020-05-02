@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CatMicroservice.Enum;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,11 +38,11 @@ namespace CatMicroservice.Models
         public string CatVetPhoneNo { get; set; }
         [Display(Name = "Cat's Medical Condition")]
         public string CatMedicalCondition { get; set; }
-        public virtual Customer Customer { get; set; }
+        public virtual Guid Customer { get; set; }
 
         public bool? ChekedIn { get; set; }
         public bool? ChekedOut { get; set; }
         public string UserId { get; set; }
     }
 }
-}
+

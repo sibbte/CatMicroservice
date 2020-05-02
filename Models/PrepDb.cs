@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,7 +44,7 @@ namespace CatMicroservice.Models
                 TagID = "1478523698",
                 Vaccination = true,
                 UserId = "system",
-                Customer = customer
+                Customer = Guid.NewGuid()
             };
 
             IList<Cat> catList = new List<Cat>();
@@ -71,7 +74,7 @@ namespace CatMicroservice.Models
                 TagID = "2478523698",
                 Vaccination = true,
                 UserId = "system",
-                Customer = customer
+                Customer = Guid.NewGuid()
             };
 
             catList.Add(cat1);
@@ -95,7 +98,7 @@ namespace CatMicroservice.Models
                 TagID = "3478523698",
                 Vaccination = true,
                 UserId = "system",
-                Customer = customer1
+                Customer = Guid.NewGuid()
             };
 
             catList1.Add(cat2);
@@ -119,7 +122,7 @@ namespace CatMicroservice.Models
                 TagID = "4478523698",
                 Vaccination = true,
                 UserId = "system",
-                Customer = customer1
+                Customer = Guid.NewGuid()
             };
 
             catList1.Add(cat3);
@@ -143,7 +146,7 @@ namespace CatMicroservice.Models
                 TagID = "5478523698",
                 Vaccination = true,
                 UserId = "system",
-                Customer = customer2
+                Customer = Guid.NewGuid()
             };
 
             catList2.Add(cat4);
@@ -167,7 +170,7 @@ namespace CatMicroservice.Models
                 TagID = "6478523698",
                 Vaccination = true,
                 UserId = "system",
-                Customer = customer2
+                Customer = Guid.NewGuid()
             };
 
             catList2.Add(cat5);
@@ -191,7 +194,7 @@ namespace CatMicroservice.Models
                 TagID = "7478523698",
                 Vaccination = true,
                 UserId = "system",
-                Customer = customer3
+                Customer = Guid.NewGuid()
             };
 
             catList3.Add(cat6);
@@ -215,7 +218,7 @@ namespace CatMicroservice.Models
                 TagID = "8478523698",
                 Vaccination = true,
                 UserId = "system",
-                Customer = customer3
+                Customer = Guid.NewGuid()
             };
 
             catList3.Add(cat7);
@@ -239,7 +242,7 @@ namespace CatMicroservice.Models
                 TagID = "9478523698",
                 Vaccination = true,
                 UserId = "system",
-                Customer = customer4
+                Customer = Guid.NewGuid()
             };
 
             catList4.Add(cat8);
@@ -263,11 +266,22 @@ namespace CatMicroservice.Models
                 TagID = "9478523698",
                 Vaccination = true,
                 UserId = "system",
-                Customer = customer4
+                Customer = Guid.NewGuid()
             };
 
             catList4.Add(cat9);
 
+            if (!context.Cats.Any())
+            {
+                System.Console.WriteLine("Seeding Cat Data...");
+                context.Cats.AddRange(cat, cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, cat9);
+
+                context.SaveChanges();
+            }
+            else
+            {
+                System.Console.WriteLine("Already have data Cat - not seeding");
+            }
         }
         }
 }
