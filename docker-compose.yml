@@ -18,11 +18,9 @@ services:
   catmicroservice:
     image: sibby91/catmicroservice
     ports:
-      - "5102:80"
+      - 81
     environment: 
       - SERVICE_PORTS=80
-    extra_hosts: 
-      - "catmicroservice:10.0.77.1"
     deploy:
      replicas: 2
      update_config:
