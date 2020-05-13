@@ -24,7 +24,7 @@ namespace CatMicroservice.Manager
 
         public IEnumerable<Cat> GetAllByName()
         {
-            return _context.Cats.Include(c => c.Customer).AsNoTracking().OrderBy(x => x.CatName).ToList();
+            return _context.Cats.OrderBy(x => x.CatName).ToList();
         }
 
         public void Update(Cat cat)
